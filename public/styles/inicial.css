@@ -1,0 +1,153 @@
+@import url('./button.css');
+@import url('./header-inicial.css');
+
+.logo {
+  margin-bottom: 16px;
+  width: 186px;
+  height: 46px;
+}
+
+.right-shape {
+  position: absolute;
+  top: 200px;
+  right: 0;
+  z-index: -1;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-grow: 1;
+  padding: 24px;
+  color: var(--white);
+  z-index: 1;
+}
+
+footer {
+  z-index: 1;
+}
+
+main h1 {
+  font-size: 26px;
+  line-height: 48px;
+  text-align: center;
+  color: var(--white);
+  font-weight: 500;
+}
+
+main p {
+  line-height: 24px;
+  color: var(--white);
+  text-align: center;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  max-width: 250px;
+}
+
+.tablet-desktop-text {
+  display: none;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.textgroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+}
+
+.button {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+.ilustracao {
+  width: 250px;
+  height: 312px;
+  display: block;
+  margin: 1rem auto -1rem auto;
+}
+
+
+@media screen and (min-width: 768px) {
+  .ilustracao {
+    margin-bottom: -1.1rem;
+    width: 340px;
+    height: 422px;
+  }
+
+  .textgroup {
+    width: 350px;
+  }
+
+  .right-shape {
+    width: 134px;
+    height: 664px;
+  }
+
+  .logo {
+    width: 250px;
+    height: 60px;
+    margin-bottom: 40px;
+  }
+
+  main {
+    padding-top: 100px;
+  }
+
+  main h1 {
+    font-size: 28px;
+    line-height: 48px;
+    margin-bottom: 24px;
+  }
+
+  main p {
+    max-width: 350px;
+    font-size: 18px;
+    line-height: 26px;
+    margin-bottom: 38px;
+  }
+
+  .button-container {
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .mobile-text {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .textgroup {
+    width: 500px;
+  }
+
+  .button {
+    font-weight: 600;
+  }
+
+  main {
+    padding-top: 0;
+  }
+
+  .textgroup p {
+    max-width: 500px;
+    margin-bottom: 32px;
+  }
+
+  .button-container {
+    max-width: 360px;
+  }
+}

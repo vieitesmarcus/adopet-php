@@ -1,0 +1,54 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 100vw;
+  
+  background-color: var(--blue);
+  background-image: url('/img/top-shape.svg');
+  background-repeat: no-repeat;
+}
+
+header {
+  padding: 3em;
+  display: flex;
+  gap: 48px;
+  width: auto;
+}
+
+.nav-bar-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  height: 43px;
+}
+
+.header-logo {
+  display: none;
+}
+
+
+@media screen and (min-width: 768px) {
+  body {
+    background-position: top left;
+    background-size: 560px 470px;
+  }
+
+  header {
+    padding: 64px 50px;
+  }
+
+  .nav-bar-list {
+    gap: 70px;
+  }
+
+  .header-logo {
+    display: block;
+  }
+
+  .header-logo-image {
+    width: 130px;
+  }
+}

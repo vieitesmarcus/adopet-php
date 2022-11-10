@@ -1,0 +1,6 @@
+.input-message-error {
+  width: 100%;
+  color: var(--red);
+  font-size: 14px;
+  margin-top: 6px;
+}

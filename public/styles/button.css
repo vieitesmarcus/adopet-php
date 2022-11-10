@@ -1,0 +1,25 @@
+.button {
+  display: block;
+  text-decoration: none;
+  padding: 8px 0;
+  background: var(--red);
+  color: var(--white);
+  width: 180px;
+  border-radius: 6px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: center;
+  border: none;
+}
+
+@media screen and (min-width: 768px) {
+  .button {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .button {
+    font-weight: 700;
+  }
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil | Adopet</title>
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="/styles/global.css">
+  <link rel="stylesheet" href="/styles/header-other.css">
+  <link rel="stylesheet" href="/styles/perfil.css">
+  <link rel="stylesheet" href="/styles/footer.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav id="nav-bar">
+      <ul class="nav-bar-list">
+        <div class="nav-bar-menu">
+          <li class="header-logo"><a href="/index"><img src="/img/logotipo-white.svg" alt="Adopet" class="header-logo-image"></a></li>
+          <li><a href="#"><img src="/img/house.svg" alt="Ícone de uma casa" class="nav-bar-image"></a></li>
+          <li><a href="#"><img src="/img/mail.svg" alt="Ícone de um e-mail" class="nav-bar-image"></a></li>
+        </div>
+        <li><a href="#"><img src="/img/user.svg" alt="Ícone de um usuário" class="nav-bar-image icon-user"></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div id="showcase">
+      <div class="textgroup">
+        <p>Esse é o perfil que aparece para responsáveis ou ONGs que recebem sua mensagem.</p>
+      </div>
+      <form>
+        <h1 class="form-title">Perfil</h1>
+        <label for="photo">Foto</label>
+        <div class="form-image__container">
+          <img src="/img/perfil-image.png" alt="Imagem de perfil" id="photo">
+          <p>Clique na foto para editar</p>
+        </div>
+        
+        <label for="name">Nome</label>
+        <input type="text" class="input" value="Joana Magalhães" placeholder="Insira seu nome">
+  
+        <label for="fone">Telefone</label>
+        <input type="tel" class="input" value="+55 (11) XXXXXXXXX" placeholder="Insira seu telefone">
+  
+        <label for="city">Cidade</label>
+        <input type="text" class="input" value="São Paulo" placeholder="Insira sua cidade">
+  
+        <label for="about">Sobre</label>
+        <span class="input input-textarea" role="textbox" contenteditable>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati.</span>
+  
+        <div class="button-container">
+          <button class="button" type="submit">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>2022 - Desenvolvido por Alura.</p>
+  </footer>
+</body>
+</html>

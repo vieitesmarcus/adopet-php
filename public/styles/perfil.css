@@ -1,0 +1,135 @@
+@import url('./button.css');
+
+.menu-list-user img {
+  width: 56px;
+  height: 56px;
+}
+
+#showcase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 524px;
+}
+
+.textgroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.textgroup p {
+  color: var(--blue);
+  line-height: 20px;
+  width: 80%;
+}
+
+main {
+  padding: 24px;
+  padding-top: 50px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  background: var(--gray-400);
+  padding: 32px 16px;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-title {
+  text-align: center;
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--gray);
+  line-height: 24px;
+}
+
+label {
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+
+.form-image__container {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-image__container p {
+  color: var(--red);
+  font-size: 12px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.input {
+  border: none;
+  outline: none;
+  resize: none;
+
+  font-size: 12px;
+  line-height: 24px;
+  padding: 12px 12px 12px 16px;
+  border-radius: 6px;
+  color: var(--gray);
+  background: var(--white);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  margin-bottom: 16px;
+}
+
+.input::placeholder {
+  color: var(--gray-200);
+}
+
+.input-textarea {
+  font-size: 12px;
+}
+
+.input-textarea[contenteditable]:empty::before {
+  content: "Fale mais sobre você";
+  color: var(--gray-200);
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .textgroup p {
+    font-size: 18px;
+  }
+
+  form {
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  #showcase {
+    max-width: 550px;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  .textgroup p {
+    width: 90%;
+  }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensagem | Adopet</title>
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="/styles/global.css">
+  <link rel="stylesheet" href="/styles/header-other.css">
+  <link rel="stylesheet" href="/styles/mensagem.css">
+  <link rel="stylesheet" href="/styles/footer.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <nav id="nav-bar">
+      <ul class="nav-bar-list">
+        <div class="nav-bar-menu">
+          <li class="header-logo"><a href="/index"><img src="/img/logotipo-white.svg" alt="Adopet" class="header-logo-image"></a></li>
+          <li><a href="#"><img src="/img/house.svg" alt="Ícone de uma casa" class="nav-bar-image"></a></li>
+          <li><a href="#"><img src="/img/mail.svg" alt="Ícone de um e-mail" class="nav-bar-image"></a></li>
+        </div>
+        <li><a href="#"><img src="/img/user.svg" alt="Ícone de um usuário" class="nav-bar-image icon-user"></a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div id="showcase">
+      <img src="/img/right-shape.svg" class="right-shape">
+      <div class="textgroup">
+        <p>Envie uma mensagem para a pessoa ou instituição que está cuidado do animal:</p>
+      </div>
+      <form>
+        <label for="name">Nome</label>
+        <input type="text" id="name" class="input" required placeholder="Insira seu nome completo">
+  
+        <label for="fone">Telefone</label>
+        <input type="number" id="fone" class="input" required placeholder="Insira seu telefone e/ou whatsapp">
+  
+        <label for="animal-name">Nome do animal</label>
+        <input type="text" id="animal-name" class="input" required placeholder="Por qual animal você se interessou?">
+  
+        <label for="message">Mensagem</label>
+        <textarea cols="70" rows="10" id="message" class="input" required placeholder="Escreva sua mensagem."></textarea>
+  
+        <div class="button-container">
+          <button class="button" type="submit">Enviar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>2022 - Desenvolvido por Alura.</p>
+  </footer>
+</body>
+</html>

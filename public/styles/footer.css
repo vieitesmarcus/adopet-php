@@ -1,0 +1,16 @@
+body {
+  height: 100vh;
+}
+
+footer {
+  padding: 41px 0;
+  background: var(--green);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+footer p {
+  color: var(--white);
+}
