@@ -32,5 +32,20 @@ class DaoUser extends Conexao
         }
         return false;
     }
+
+    public function load(User $user)
+    {
+        $email = $user->getEmail();
+        $password = $user->getPassword();
+        $sql = "SELECT id, name, email FROM user WHERE email = ? AND password = ?";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->execute([$email, $password]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($result){
+            $_SESSION["user"] = $result;
+            return true;
+        }
+        return false;
+    }
     
 }

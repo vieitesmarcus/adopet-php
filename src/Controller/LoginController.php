@@ -12,7 +12,11 @@ class LoginController  implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $content = View::render('pages/login');
+        $loginError = isset($_SESSION["login"]) ? $_SESSION["login"] : "";
+        session_destroy();
+        $content = View::render('pages/login',[
+            "error"=> $loginError
+        ]);
 
         return new Response(200, [], $content);
     }

@@ -31,15 +31,20 @@
     <img src="/img/right-shape.svg" class="right-shape">
     <img src="/img/logotipo-blue.svg" alt="Adopet" class="logo">
     <p>Já tem conta? Faça seu login:</p>
+    <div class="input-container">
+      <span class="input-message-error">{{error}}</span>
+    </div>
     <form action="/loginUser" method="POST">
       <label for="email">Email</label>
-      <input type="email" placeholder="Insira seu email" id="email" required>
-
-      <label for="password" class="password-all">Senha <span></span></label>
-      <input type="password" placeholder="Insira sua senha" class="password-all" required>
+      <input name="email" type="email" placeholder="Insira seu email" id="email" required>
       
+      <label for="password" class="password-all">Senha <span></span></label>
+      <input name="password" type="password" placeholder="Insira sua senha" class="password-all" required>
+      
+
       <a href="#">Esqueci minha senha</a>
       <button class="button" type="submit">Entrar</button>
+      
     </form>
   </main>
 

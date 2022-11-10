@@ -12,7 +12,7 @@ class User
     private string $created_at;
     private string $updated_at;
 
-    public function __construct(string $name, string $email, string $password)
+    public function __construct(string $name=null, string $email=null, string $password=null)
     {
         $this->setName($name);
         $this->setEmail($email);
