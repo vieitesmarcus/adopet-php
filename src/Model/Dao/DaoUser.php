@@ -18,7 +18,7 @@ class DaoUser extends Conexao
             return false;
         }
 
-        return parent::insert("user", [$name, $email, $password], 'name, email, password');
+        return parent::insertUser("user", [$name, $email, $password], 'name, email, password');
     }
 
     public function verificaSeEmailExisteNoBanco($email):bool

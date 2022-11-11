@@ -1,9 +1,12 @@
 <?php
 //ROTAS AUTENTICADAS
-use Adopet\Controller\HomeController;
+
+use Adopet\Controller\LogoutController;
+use Adopet\Controller\MyPetsController;
 use Adopet\Controller\PerfilController;
 
 return [
-    '/home' => HomeController::class,
-    '/perfil' => PerfilController::class
+    '/mypets' => MyPetsController::class,
+    '/perfil' => PerfilController::class,
+    '/logout' => LogoutController::class
 ];

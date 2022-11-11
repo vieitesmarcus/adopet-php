@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-var_dump($_SESSION);
+// var_dump($_SESSION);
 
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7Server\ServerRequestCreator;
@@ -20,7 +20,7 @@ if(isset($_SESSION['logado']) && $_SESSION['logado'] === true){
 if(!array_key_exists($url, $routes)){
     http_response_code(404);
     if(isset($_SESSION['logado']) && $_SESSION['logado'] === true){
-        header('Location:/home');
+        header('Location:/mypets');
         exit();
     }
     header('Location:/login');

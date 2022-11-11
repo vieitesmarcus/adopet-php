@@ -29,7 +29,7 @@ abstract class Conexao
         }
     }
 
-    public function insert(string $table,$params = [], $fields = null): bool
+    public function insertUser(string $table,$params = [], $fields = null): bool
     {
         $numparams = "";
         for ($i=0; $i < count($params); $i++) $numparams .= ",?";

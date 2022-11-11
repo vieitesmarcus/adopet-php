@@ -29,6 +29,6 @@ class LoginUserController  implements RequestHandlerInterface
         }
         // $content = View::render('pages/login');
         $_SESSION["logado"]=true;
-        return new Response(200, ['location'=>'/home']);
+        return new Response(200, ['location'=>'/mypets']);
     }
 }
