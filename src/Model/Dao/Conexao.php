@@ -24,8 +24,11 @@ abstract class Conexao
             return $this->conexao;
         }catch(PDOException $error){
             echo "ERRO => " . $error->getMessage();
+            header('Location: /login',true, 302);
+            return false;
         }catch(Error $error){
             echo "Cai no segundo catch " . $error->getMessage();
+            return false;
         }
     }
 

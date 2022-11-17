@@ -11,6 +11,7 @@
         "nyholm/psr7-server": "^1.0",
         "psr/http-factory": "^1.0",
         "php-http/message-factory": "^1.0",
-        "psr/http-server-handler": "^1.0"
+        "psr/http-server-handler": "^1.0",
+        "phpmailer/phpmailer": "^6.6"
     }
 }

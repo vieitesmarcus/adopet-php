@@ -34,6 +34,18 @@ class DaoPets extends Conexao
         return false;
     }
 
+    public function index()
+    {
+        $sql = "SELECT id, name, age, size,feature, city, tel FROM pets";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if($result){
+            return $result;
+        }
+        return false;
+    }
+
     public function delete($id, $idUser): bool
     {
         $sql = "DELETE FROM pets WHERE id = ? and user_id = ?";

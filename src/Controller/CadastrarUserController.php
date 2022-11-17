@@ -19,10 +19,10 @@ class CadastrarUserController implements RequestHandlerInterface
         if ($request->getParsedBody()) {
 
             // filtra as variaveis
-            $user['user'] = $request->getParsedBody();
-            $user['user']['name'] = filter_var($user['user']['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $user['user']['email'] = filter_var($user['user']['email'], FILTER_SANITIZE_EMAIL);
-            $user['user']['password'] = filter_var($user['user']['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $user['user']                    = $request->getParsedBody();
+            $user['user']['name']            = filter_var($user['user']['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $user['user']['email']           = filter_var($user['user']['email'], FILTER_SANITIZE_EMAIL);
+            $user['user']['password']        = filter_var($user['user']['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $user['user']['confirmPassword'] = filter_var($user['user']['confirmPassword'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
             //verifica dados vindo do post

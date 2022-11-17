@@ -16,7 +16,7 @@ class MyPetsController implements RequestHandlerInterface
     {
 
         if($request->getQueryParams() && key_exists('id', $request->getQueryParams())){ //só vai deletar ou entra no if se a key do array for id 
-            $id = filter_var($request->getQueryParams()['id'], FILTER_VALIDATE_INT);
+            $id     = filter_var($request->getQueryParams()['id'], FILTER_VALIDATE_INT);
             $idUser = $_SESSION["user"]['id'];
             
             $obDaoPets = new DaoPets();
@@ -25,13 +25,13 @@ class MyPetsController implements RequestHandlerInterface
         }
 
         if($request->getParsedBody()){
-            $pet['pet'] = $request->getParsedBody();
-            $pet['pet']['name'] =  filter_var($pet['pet']['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $pet['pet']['age'] =  filter_var($pet['pet']['age'], FILTER_VALIDATE_INT);
-            $pet['pet']['size'] =  filter_var($pet['pet']['size'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $pet['pet']['feature'] =  filter_var($pet['pet']['feature'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $pet['pet']['city'] =  trim(filter_var($pet['pet']['city'], FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-            $pet['pet']['tel'] =  str_replace(" ","",filter_var($pet['pet']['tel'], FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $pet['pet']            = $request->getParsedBody();
+            $pet['pet']['name']    = filter_var($pet['pet']['name'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $pet['pet']['age']     = filter_var($pet['pet']['age'], FILTER_VALIDATE_INT);
+            $pet['pet']['size']    = filter_var($pet['pet']['size'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $pet['pet']['feature'] = filter_var($pet['pet']['feature'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $pet['pet']['city']    = trim(filter_var($pet['pet']['city'], FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            $pet['pet']['tel']     = str_replace(" ","",filter_var($pet['pet']['tel'], FILTER_SANITIZE_FULL_SPECIAL_CHARS));
 
             $obPet = new Pets(
                 $pet['pet']['name'],
@@ -49,12 +49,12 @@ class MyPetsController implements RequestHandlerInterface
         // if($request->getQueryParams())
 
         //VERIFICA SE EXISTE ALGUM ERRO NOS CAMPOS DE INSERÇÃO DE PET, CASO EXISTA, ELE APARECE
-        $nome = isset($_SESSION["nome"]) ? $_SESSION["nome"] : "";
-        $idade = isset($_SESSION["idade"]) ? $_SESSION["idade"] : "";
-        $tamanho = isset($_SESSION["tamanho"]) ? $_SESSION["tamanho"] : "";
+        $nome            = isset($_SESSION["nome"]) ? $_SESSION["nome"] : "";
+        $idade           = isset($_SESSION["idade"]) ? $_SESSION["idade"] : "";
+        $tamanho         = isset($_SESSION["tamanho"]) ? $_SESSION["tamanho"] : "";
         $caracteristicas = isset($_SESSION["caracteristicas"]) ? $_SESSION["caracteristicas"] : "";
-        $city = isset($_SESSION["city"]) ? $_SESSION["city"] : "";
-        $tel = isset($_SESSION["tel"]) ? $_SESSION["tel"] : "";
+        $city            = isset($_SESSION["city"]) ? $_SESSION["city"] : "";
+        $tel             = isset($_SESSION["tel"]) ? $_SESSION["tel"] : "";
         //------------------------------------------------------------
 
         //CARREGA OS PETS QUE O USUARIO ADICIONOU 
@@ -64,13 +64,13 @@ class MyPetsController implements RequestHandlerInterface
         if ($pets) {
             foreach ($pets as $pet) {
                 $page .= View::render('pages/pets', [
-                    'id' => $pet['id'],
-                    'name' => $pet['name'],
-                    'age'  => $pet['age'],
-                    'size' => $pet['size'],
+                    'id'      => $pet['id'],
+                    'name'    => $pet['name'],
+                    'age'     => $pet['age'],
+                    'size'    => $pet['size'],
                     'feature' => $pet['feature'],
-                    'city' => $pet['city'],
-                    'tel' => $pet['tel']
+                    'city'    => $pet['city'],
+                    'tel'     => $pet['tel']
                 ]);
             }
         }
@@ -79,13 +79,13 @@ class MyPetsController implements RequestHandlerInterface
 
 
         $content = View::render('pages/mypets', [
-            'nome' => $nome,
-            'idade' => $idade,
-            'tamanho' => $tamanho,
+            'nome'            => $nome,
+            'idade'           => $idade,
+            'tamanho'         => $tamanho,
             'caracteristicas' => $caracteristicas,
-            'city' => $city,
-            'tel' => $tel,
-            "pets" => $page
+            'city'            => $city,
+            'tel'             => $tel,
+            "pets"            => $page
         ]);
 
         // $page = parent::getPage('Adopet | Home', $content);

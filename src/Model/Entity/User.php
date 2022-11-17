@@ -9,6 +9,7 @@ class User
     private string $name;
     private string $email;
     private string $password;
+    private bool   $mailValidation;
     private string $created_at;
     private string $updated_at;
 
@@ -136,6 +137,26 @@ class User
     public function setUpdated_at($updated_at)
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of mailValidation
+     */ 
+    public function getMailValidation()
+    {
+        return $this->mailValidation;
+    }
+
+    /**
+     * Set the value of mailValidation
+     *
+     * @return  self
+     */ 
+    public function setMailValidation($mailValidation)
+    {
+        $this->mailValidation = $mailValidation;
 
         return $this;
     }
