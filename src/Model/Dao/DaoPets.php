@@ -22,7 +22,7 @@ class DaoPets extends Conexao
     // }
 
 
-    public function loadAll($id)
+    public function findAll($id)
     {
         $sql = "SELECT id, name, age, size,feature, city, tel FROM pets WHERE user_id = ?";
         $stmt = $this->conexao->prepare($sql);
@@ -46,7 +46,7 @@ class DaoPets extends Conexao
         return false;
     }
 
-    public function delete($id, $idUser): bool
+    public function delete($id, $idUser)
     {
         $sql = "DELETE FROM pets WHERE id = ? and user_id = ?";
         $stmt = $this->conexao->prepare($sql);

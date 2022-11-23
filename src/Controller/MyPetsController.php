@@ -2,7 +2,9 @@
 
 namespace Adopet\Controller;
 
+use Adopet\Model\Dao\DaoPerfil;
 use Adopet\Model\Dao\DaoPets;
+use Adopet\Model\Entity\Perfil;
 use Adopet\Model\Entity\Pets;
 use Adopet\Utils\View;
 use Nyholm\Psr7\Response;
@@ -59,7 +61,7 @@ class MyPetsController implements RequestHandlerInterface
 
         //CARREGA OS PETS QUE O USUARIO ADICIONOU 
         $obDaoPets = new DaoPets();
-        $pets = $obDaoPets->loadAll($_SESSION['user']['id']);
+        $pets = $obDaoPets->findAll($_SESSION['user']['id']);
         $page = "";
         if ($pets) {
             foreach ($pets as $pet) {
@@ -77,6 +79,27 @@ class MyPetsController implements RequestHandlerInterface
         //--------------------------------------
 
 
+        $obPerfilDao = new DaoPerfil();
+        $result = $obPerfilDao->findByIdUser($_SESSION['user']['id']);
+        $imgPerfil = "";
+        if($result){
+            $obPerfil = new Perfil(
+                $result[0]['user_id'],
+                $result[0]['id'],
+                $result[0]['photo'],
+                $result[0]['name'],
+                $result[0]['phone'],
+                $result[0]['city'],
+                $result[0]['about'],
+
+            );
+            if($obPerfil->getPhoto() === ""){
+                $imgPerfil = 'user.svg';
+            }else{
+                $imgPerfil = $obPerfil->getPhoto();
+            }
+        }
+        
 
         $content = View::render('pages/mypets', [
             'nome'            => $nome,
@@ -85,7 +108,8 @@ class MyPetsController implements RequestHandlerInterface
             'caracteristicas' => $caracteristicas,
             'city'            => $city,
             'tel'             => $tel,
-            "pets"            => $page
+            "pets"            => $page,
+            'url-avatar'      => $imgPerfil
         ]);
 
         // $page = parent::getPage('Adopet | Home', $content);

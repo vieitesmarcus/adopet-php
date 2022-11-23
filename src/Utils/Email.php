@@ -16,9 +16,9 @@ class Email
     private string $altBody;
 
     public function __construct(
-        array $sendTo,
-        array $replayTo,
-        array $addCc
+        array $sendTo = [],
+        array $replayTo =[],
+        array $addCc =[]
     ) {
         $this->setSendTo($sendTo);
         $this->setReplayTo($replayTo);
@@ -29,20 +29,21 @@ class Email
     {
 
         $mail = new PHPMailer(true);
-
+        $mail->CharSet = 'utf-8';
+        Enviroment::addEnv();
         try {
             //Server settings
             $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.example.com';                     //Set the SMTP server to send through
+            $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'user@example.com';                     //SMTP username
-            $mail->Password   = 'secret';                               //SMTP password
+            $mail->Username   = getenv('EMAILHOST');                     //SMTP username
+            $mail->Password   = getenv('EMAILPASSWD');                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('from@example.com', 'Mailer');
+            $mail->setFrom(getenv('EMAILHOST'), 'Mailer');
             if (count($this->sendTo) > 0) {
                 foreach ($this->sendTo as $item) {
                     $mail->addAddress($item);
@@ -70,11 +71,11 @@ class Email
 
             //Content
             $mail->isHTML(true);                                  //Set email format to HTML
-            $mail->Subject = $subject;
+            $mail->Subject = mb_convert_encoding($subject,'utf-8');
             $mail->Body    = $body;
             $mail->AltBody = $altBody;
-            var_dump($mail);
-            exit();
+            // var_dump($mail);
+            // exit();
             $mail->send();
             echo 'Message has been sent';
         } catch (PHPMailerException $e) {

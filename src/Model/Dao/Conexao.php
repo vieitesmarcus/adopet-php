@@ -15,11 +15,7 @@ abstract class Conexao
     {
         try{
             Enviroment::addEnv();
-            define('HOST', getenv('HOST'));
-            define('DBNAME', getenv('DBNAME'));
-            define('USERNAME', getenv('USERNAME'));
-            define('PASSWORD', getenv('PASSWORD'));
-            $this->conexao = new PDO("mysql:host=".HOST.";dbname=".DBNAME,USERNAME,PASSWORD);
+            $this->conexao = new PDO("mysql:host=".getenv('HOST').";dbname=".getenv('DBNAME'),getenv('USERNAME'),getenv('PASSWORD'));
             $this->conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $this->conexao;
         }catch(PDOException $error){

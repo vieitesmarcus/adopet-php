@@ -69,6 +69,17 @@ label {
   align-items: center;
 }
 
+.form-image__container .avatar__container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.form-image__container .avatar__container img{
+  width: 100%;
+
+}
+
 .form-image__container p {
   color: var(--red);
   font-size: 12px;

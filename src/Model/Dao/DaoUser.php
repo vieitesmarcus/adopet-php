@@ -62,5 +62,18 @@ class DaoUser extends Conexao
             return false;
         }
     }
+
+    public function update(array $params = []): bool
+    {
+        try{
+            $sql = "UPDATE user SET email_validation = 1 WHERE email = ?"; //sql
+            $stmt = $this->conexao->prepare($sql);
+            return $stmt->execute($params);
+        } catch(PDOException $e){
+            "Erro => ". $e->getMessage();
+            return false;
+        }
+
+    }
     
 }
