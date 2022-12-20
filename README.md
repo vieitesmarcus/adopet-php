@@ -15,3 +15,18 @@ Rápida descrição do objetivo de fazer esse projeto
 ## Detalhes do projeto
 
 Textos e imagens que descrevam seu projeto, suas conquistas, seus desafios, próximos passos, etc...(em construção)
+
+# Como Usar ?
+
+    Renomeie o .env-example para .env 
+    Altere os dados do banco de dados
+
+    Instale o banco de dados com o arquivo dump.sql
+
+    Caso use o xamp apenas ligue o mysql
+    
+    para usar a aplicação usaremos o servidor embutido do proprio php:
+    php -S localhost:80 -t public
+    
+
+  

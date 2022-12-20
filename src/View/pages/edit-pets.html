@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil | Adopet</title>
+  <link rel="stylesheet" href="/styles/reset.css">
+  <link rel="stylesheet" href="/styles/global.css">
+  <link rel="stylesheet" href="/styles/header-other.css">
+  <link rel="stylesheet" href="/styles/home.css">
+  <link rel="stylesheet" href="/styles/popup.css">
+  <link rel="stylesheet" href="/styles/error.css">
+  <link rel="stylesheet" href="/styles/perfil.css">
+  <link rel="stylesheet" href="/styles/cadastro.css">
+  <link rel="stylesheet" href="/styles/footer.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<header>
+  <nav id="nav-bar">
+    <ul class="nav-bar-list">
+      <div class="nav-bar-menu">
+        <li class="header-logo"><a href="/index"><img src="/img/logotipo-white.svg" alt="Adopet"
+                                                      class="header-logo-image"></a></li>
+        <li><a href="/home"><img src="/img/house.svg" alt="Ícone de uma casa" class="nav-bar-image"></a></li>
+        <li><a href="/mail"><img src="/img/mail.svg" alt="Ícone de um e-mail" class="nav-bar-image"></a></li>
+      </div>
+      <li><a href="#"><img src="/avatar/{{url-avatar}}" alt="Ícone de um usuário" class="nav-bar-image icon-user "></a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div id="showcase">
+    <div class="textgroup">
+      <p>Esse é o perfil que aparece para responsáveis ou ONGs que recebem sua mensagem.</p>
+    </div>
+    <form method="POST" action="/mypets/edit" enctype="multipart/form-data">
+
+      <h1 class="form-title">Pet</h1>
+      <label for="photo">Foto</label>
+      <div class="form-image__container">
+        <div class="avatar__container">
+          <img src="/img/pets/{{url-pet}}" alt="foto do pet" id="photo">
+        </div>
+        <input type="file" name="photo" accept="image/png, image/jpeg">
+        <p>{{upload}}</p>
+      </div>
+
+      <input name="pet[id]" id="id" class="input" type="text" data-type="name"
+             placeholder="" value="{{id}}" hidden required>
+      <div class="input-container">
+        <label for="name" class="input-label">Nome</label>
+        <input name="pet[name]" id="name" class="input" type="text" data-type="name"
+               placeholder="Digite o nome do pet" value="{{name}}" required>
+        <span class="input-message-error">{{nome}}</span>
+      </div>
+
+      <div class="input-container">
+        <label for="age" class="input-label">Idade</label>
+        <input name="pet[age]" id="age" class="input" type="text" data-type="age" placeholder="Digite a idade do pet"
+              value="{{age}}" required>
+        <span class="input-message-error">{{idade}}</span>
+      </div>
+
+      <div class="input-container">
+        <label for="size" class="input-label">Tamanho</label>
+        <input name="pet[size]" id="size" class="input" type="text" data-type="size"
+               placeholder="Digite o tamanho do pet" value="{{size}}" required>
+        <span class="input-message-error">{{tamanho}}</span>
+      </div>
+
+      <div class="input-container">
+        <label for="feature" class="input-label">Caracteristicas</label>
+        <input name="pet[feature]" id="feature" class="input" type="text" data-type="feature"
+               placeholder="Como seu pet é" value="{{feature}}" required>
+        <span class="input-message-error">{{caracteristicas}}</span>
+      </div>
+
+      <div class="input-container">
+        <label for="name" class="input-label">City</label>
+        <input name="pet[city]" id="city" class="input" type="text" data-type="city" placeholder="de onde o pet é"
+               value="{{city}}" required>
+        <span class="input-message-error">{{cidade}}</span>
+      </div>
+
+      <div class="input-container">
+        <label for="tel" class="input-label">tel</label>
+        <input name="pet[tel]" id="tel" class="input" type="text" data-type="tel" placeholder="telefone para contato"
+               value="{{tel}}" required>
+        <span class="input-message-error">{{telefone}}</span>
+      </div>
+
+
+      <button class="button button-desktop" type="submit">Cadastrar!</button>
+      <button class="button button-mobile-tablet" type="submit">Cadastrar</button>
+    </form>
+  </div>
+</main>
+
+<footer>
+  <p>2022 - Desenvolvido por Alura.</p>
+</footer>
+</body>
+
+</html>

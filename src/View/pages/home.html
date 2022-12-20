@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/styles/global.css">
   <link rel="stylesheet" href="/styles/header-other.css">
   <link rel="stylesheet" href="/styles/home.css">
+  <link rel="stylesheet" href="/styles/cadastro.css">
   <link rel="stylesheet" href="/styles/footer.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,10 +21,9 @@
       <ul class="nav-bar-list">
         <div class="nav-bar-menu">
           <li class="header-logo"><a href="/index"><img src="/img/logotipo-white.svg" alt="Adopet" class="header-logo-image"></a></li>
-          <li><a href="/index"><img src="/img/house.svg" alt="Ícone de uma casa" class="nav-bar-image"></a></li>
+          <li><a href="/home"><img src="/img/house.svg" alt="Ícone de uma casa" class="nav-bar-image"></a></li>
           <li><a href="/mail"><img src="/img/mail.svg" alt="Ícone de um e-mail" class="nav-bar-image"></a></li>
         </div>
-        <li><a href="/perfil"><img src="/img/user.svg" alt="Ícone de um usuário" class="nav-bar-image icon-user"></a></li>
       </ul>
     </nav>
   </header>
@@ -33,9 +33,23 @@
     <div class="textgroup">
       <p><span>Olá!</span> Veja os amigos disponíveis para adoção!</p>
     </div>
+    <div class="paginacao">
+      <a href="?page={{pagePrev}}" class="left"><</a>
+      <form action="/home?page=">
+        <input type="text" name="page" value="{{page}}">
+      </form>
+      <a href="?page={{pageNext}}" class="right">></a>
+    </div>
     <div class="pets__container">
       {{pets}}
       
+    </div>
+    <div class="paginacao">
+
+      <form>
+        <input type="text" value="página {{pagesTotal}}"disabled>
+      </form>
+
     </div>
   </main>
 

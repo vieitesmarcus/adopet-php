@@ -3,7 +3,6 @@
 namespace Adopet\Model\Dao;
 
 use Adopet\Model\Entity\Perfil;
-use Adopet\Model\Entity\User;
 use PDO;
 use PDOException;
 
@@ -80,16 +79,19 @@ class DaoPerfil extends Conexao
         }
     }
 
-    public function findByIdUser($id)
+    public function findByIdUser($userId)
     {
         try {
-            $id = (int)$id;
+            $userId = (int)$userId;
             //verifica se existe no banco
-            $sql = "SELECT * FROM perfil WHERE user_id = ?";
+            $sql = "SELECT id, photo, name, phone, city, about, user_id FROM perfil WHERE user_id = ?";
             $stmt = $this->conexao->prepare($sql);
-            if ($stmt->execute([$id])) {
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                return $result;
+            if ($stmt->execute([$userId])) {
+                $result = $stmt->fetchAll(PDO::FETCH_CLASS);
+                foreach ($result as $item){
+                    return $item;
+                }
+
             }
             return false;
         } catch (PDOException $e) {

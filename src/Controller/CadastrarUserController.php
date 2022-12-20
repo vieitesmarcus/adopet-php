@@ -22,10 +22,10 @@ class CadastrarUserController implements RequestHandlerInterface
             $email     = filter_var($request->getQueryParams()['confirm'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             // var_dump($request->getQueryParams()['confirm']);
 
-            //descriptacao do email
+            //descriptografia do email
             $obSsl = new SslEncryptDecrypt();
             $emailDescriptografado = $obSsl->decrypt($email);
-            var_dump($emailDescriptografado);
+            // var_dump($emailDescriptografado);
             $obDao = new DaoUser();
             
             if($obDao->update([$emailDescriptografado])){

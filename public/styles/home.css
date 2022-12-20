@@ -104,6 +104,29 @@ main {
   line-height: 16px;
   font-weight: 400;
 }
+.paginacao {
+  align-items: center;
+  /*border: 1px solid blue;*/
+  display: flex;
+  justify-content: center;
+  /*gap: 10px;*/
+  width: 200px;
+
+}
+
+.paginacao > a{
+  font-size: 28px;
+  /*border: 1px solid red;*/
+  width: 20px;
+}
+.paginacao > form{
+  margin: 0;
+  /*border: 1px solid green;*/
+  /*display: inline;*/
+}
+.paginacao > form > input {
+  height: 100%;
+}
 
 
 @media screen and (min-width: 768px) {

@@ -2,3 +2,4 @@
 /.env
 /schemaDb.txt
 /vendor
+/.idea

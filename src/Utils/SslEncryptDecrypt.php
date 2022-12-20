@@ -12,9 +12,9 @@ class SslEncryptDecrypt
         $dataEncrypt = openssl_encrypt(
             $data,
             'aes-128-gcm',
-            base64_decode(getenv('SSLPASSWORD')),
+            base64_decode(getenv('CONF_ENCRYPT_SSLPASSWORD')),
             $options = 0,
-            base64_decode(getenv('IV')),
+            base64_decode(getenv('CONF_ENCRYPT_IV')),
             $tag
         );
         // $this->tag = base64_encode($tag);
@@ -36,9 +36,9 @@ class SslEncryptDecrypt
         return openssl_decrypt(
             substr($cipherText,0,-16),
             'aes-128-gcm',
-            base64_decode(getenv('SSLPASSWORD')),
+            base64_decode(getenv('CONF_ENCRYPT_SSLPASSWORD')),
             $options = 0,
-            base64_decode(getenv('IV')),
+            base64_decode(getenv('CONF_ENCRYPT_IV')),
             $authTag
         );
     }

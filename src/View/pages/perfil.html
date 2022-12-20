@@ -23,7 +23,7 @@
         <div class="nav-bar-menu">
           <li class="header-logo"><a href="/index"><img src="/img/logotipo-white.svg" alt="Adopet"
                 class="header-logo-image"></a></li>
-          <li><a href="/index"><img src="/img/house.svg" alt="Ícone de uma casa" class="nav-bar-image"></a></li>
+          <li><a href="/home"><img src="/img/house.svg" alt="Ícone de uma casa" class="nav-bar-image"></a></li>
           <li><a href="/mail"><img src="/img/mail.svg" alt="Ícone de um e-mail" class="nav-bar-image"></a></li>
         </div>
         <li><a href="#"><img src="/avatar/{{url-avatar}}" alt="Ícone de um usuário" class="nav-bar-image icon-user "></a></li>
@@ -48,16 +48,16 @@
         </div>
 
         <label for="name">Nome</label>
-        <input name="perfil[name]" type="text" class="input" value="{{name}}" placeholder="Insira seu nome">
+        <input name="perfil[name]" type="text" class="input" id="name" value="{{name}}" placeholder="Insira seu nome">
 
         <label for="fone">Telefone</label>
-        <input name="perfil[phone]" type="tel" class="input" value="{{phone}}" placeholder="Insira seu telefone">
+        <input name="perfil[phone]" type="tel" class="input" id="fone" value="{{phone}}" placeholder="Insira seu telefone">
 
         <label for="city">Cidade</label>
-        <input name="perfil[city]" type="text" class="input" value="{{city}}" placeholder="Insira sua cidade">
+        <input name="perfil[city]" type="text" class="input" id="city" value="{{city}}" placeholder="Insira sua cidade">
 
         <label for="about">Sobre</label>
-        <textarea name="perfil[about]" class="input input-textarea" role="textbox" contenteditable>{{about}}</textarea>
+        <textarea name="perfil[about]" class="input input-textarea" id="about" role="textbox" contenteditable>{{about}}</textarea>
 
         <div class="button-container">
           <button class="button" type="submit">Salvar</button>

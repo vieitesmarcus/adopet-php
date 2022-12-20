@@ -10,6 +10,7 @@ class User
     private string $email;
     private string $password;
     private bool   $mailValidation;
+    private Perfil $perfil;
     private string $created_at;
     private string $updated_at;
 
@@ -157,6 +158,26 @@ class User
     public function setMailValidation($mailValidation)
     {
         $this->mailValidation = $mailValidation;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of perfil
+     */ 
+    public function getPerfil(): Perfil
+    {
+        return $this->perfil;
+    }
+
+    /**
+     * Set the value of perfil
+     *
+     * @return  self
+     */ 
+    public function setPerfil(Perfil $perfil)
+    {
+        $this->perfil = $perfil;
 
         return $this;
     }

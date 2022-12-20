@@ -14,11 +14,11 @@ class Perfil
 
     public function __construct(
         int $idUser,
-        int    $id    = 0,
+        int $id = 0,
         string $photo = "",
-        string $name  = "",
+        string $name = "",
         string $phone = "",
-        string $city  = "",
+        string $city = "",
         string $about = ""
     ) {
         $this->setIdUser($idUser);
@@ -150,7 +150,6 @@ class Perfil
 
         return $this;
     }
-
 
 
     /**

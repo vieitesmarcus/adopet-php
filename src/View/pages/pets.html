@@ -1,7 +1,7 @@
 <div class="pet">
-    <img src="/img/pets/dunga.png" alt="Imagem do Dunga" class="pet-image">
+    <img src="/img/pets/{{photo}}" alt="Imagem do {{name}}" class="pet-image">
     <div class="pet-texgroup">
-        <h2 class="pet-name">{{name}} <a href="/mypets?id={{id}}">X</a></h2>
+        <h2 class="pet-name">{{name}} <a href="/mypets?id={{id}}">X</a> <a href="/mypets/edit?id={{id}}">Edit</a></h2>
         <span class="pet-age">{{age}} ano(s)</span>
         <p class="pet-description">{{size}} <span>{{feature}}</span></p>
         <address class="pet-local">{{city}}</address>

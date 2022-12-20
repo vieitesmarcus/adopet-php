@@ -31,7 +31,8 @@
                     </li>
                     <li><a href="/mail"><img src="/img/mail.svg" alt="Ícone de um e-mail" class="nav-bar-image"></a>
                     </li>
-                    <li><a id="addPet" href="#"><img width="24" src="/img/adicao.svg" alt="Ícone de um adição" class="nav-bar-image"></a>
+                    <li><a id="addPet" href="#"><img width="24" src="/img/adicao.svg" alt="Ícone de um adição"
+                                class="nav-bar-image"></a>
                     </li>
                     <li><a href="/logout">Sair</a>
                     </li>
@@ -43,48 +44,65 @@
     </header>
 
     <div id="popup" class="container popup">
-        <form method="POST" action="/mypets">
+        <form method="POST" action="/mypets" enctype="multipart/form-data">
+
+            <h1 class="form-title">Perfil</h1>
+            <label for="photo">Foto</label>
+            <div class="form-image__container">
+                <div class="avatar__container">
+                    <img src="/avatar/{{url-pet}}" alt="Imagem de perfil" id="photo">
+                </div>
+                <input type="file" id="photo" name="photo" accept="image/png, image/jpeg">
+                <p>{{upload}}</p>
+            </div>
+
             <div class="input-container">
-              <label for="name" class="input-label">Nome</label>
-              <input name="name" id="name" class="input" type="text" data-type="name" placeholder="Digite o nome do pet" required>
-              <span class="input-message-error">{{nome}}</span>
+                <label for="name" class="input-label">Nome</label>
+                <input name="name" id="name" class="input" type="text" data-type="name"
+                    placeholder="Digite o nome do pet" required>
+                <span class="input-message-error">{{nome}}</span>
             </div>
 
             <div class="input-container">
                 <label for="age" class="input-label">Idade</label>
-                <input name="age" id="age" class="input" type="text" data-type="age" placeholder="Digite a idade do pet" required>
+                <input name="age" id="age" class="input" type="text" data-type="age" placeholder="Digite a idade do pet"
+                    required>
                 <span class="input-message-error">{{idade}}</span>
             </div>
 
             <div class="input-container">
                 <label for="size" class="input-label">Tamanho</label>
-                <input name="size" id="size" class="input" type="text" data-type="size" placeholder="Digite o tamanho do pet" required>
+                <input name="size" id="size" class="input" type="text" data-type="size"
+                    placeholder="Digite o tamanho do pet" required>
                 <span class="input-message-error">{{tamanho}}</span>
             </div>
 
             <div class="input-container">
                 <label for="feature" class="input-label">Caracteristicas</label>
-                <input name="feature" id="feature" class="input" type="text" data-type="feature" placeholder="Como seu pet é" required>
+                <input name="feature" id="feature" class="input" type="text" data-type="feature"
+                    placeholder="Como seu pet é" required>
                 <span class="input-message-error">{{caracteristicas}}</span>
             </div>
 
             <div class="input-container">
                 <label for="name" class="input-label">City</label>
-                <input name="city" id="city" class="input" type="text" data-type="city" placeholder="de onde o pet é" required>
+                <input name="city" id="city" class="input" type="text" data-type="city" placeholder="de onde o pet é"
+                    required>
                 <span class="input-message-error">{{city}}</span>
             </div>
 
             <div class="input-container">
                 <label for="tel" class="input-label">tel</label>
-                <input name="tel" id="tel" class="input" type="text" data-type="tel" placeholder="telefone para contato" required>
+                <input name="tel" id="tel" class="input" type="text" data-type="tel" placeholder="telefone para contato"
+                    required>
                 <span class="input-message-error">{{tel}}</span>
             </div>
-      
-            
-      
+
+
+
             <button class="button button-mobile-tablet" type="submit">Cadastrar</button>
             <button class="button button-desktop" type="submit">Cadastrar!</button>
-          </form>
+        </form>
     </div>
 
     <main>
@@ -92,8 +110,23 @@
         <div class="textgroup">
             <p><span>Olá!</span> Veja os amigos disponíveis para adoção!</p>
         </div>
+        <div class="paginacao">
+            <a href="?page={{pagePrev}}" class="left"><</a>
+            <form action="/mypets?page=">
+                <input type="text" name="page" value="{{page}}">
+            </form>
+            <a href="?page={{pageNext}}" class="right">></a>
+        </div>
         <div class="pets__container">
             {{pets}}
+        </div>
+
+        <div class="paginacao">
+
+            <form>
+                <input type="text" value="página {{pagesTotal}}"disabled>
+            </form>
+
         </div>
     </main>
 

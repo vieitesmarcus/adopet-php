@@ -11,21 +11,26 @@ class Pets
     private string $feature;
     private string $city;
     private string $tel;
+    private ?string $photo;
 
     public function __construct(
-        string $name,
-        string $age,
-        string $size,
-        string $feature,
-        string $city,
-        string $tel
+        int $id = 0,
+        string $name="",
+        string $age="",
+        string $size="",
+        string $feature="",
+        string $city="",
+        string $tel="",
+        string $photo=""
     ) {
+        $this->setId($id);
         $this->setName($name);
         $this->setAge($age);
         $this->setSize($size);
         $this->setFeature($feature);
         $this->setCity($city);
         $this->setTel($tel);
+        $this->setPhoto($photo);
     }
 
     public function getId(): int
@@ -103,6 +108,30 @@ class Pets
     public function setTel(string $tel): self
     {
         $this->tel = $tel;
+        return $this;
+    }
+
+    /**
+     * Get the value of photo
+     */ 
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set the value of photo
+     *
+     * @return  self
+     */ 
+    public function setPhoto($photo)
+    {
+        if($photo === null){
+            $this->photo = '';
+            return $this;
+        }
+        $this->photo = $photo;
+
         return $this;
     }
 }

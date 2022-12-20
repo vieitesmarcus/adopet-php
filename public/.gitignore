@@ -1,1 +1,4 @@
-/avatar
+/avatar/*
+/img/*
+/data.php
+/data.txt
