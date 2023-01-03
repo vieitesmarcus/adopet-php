@@ -2,6 +2,7 @@
 
 namespace Adopet\Controller;
 
+use Adopet\Helper\EntityManagerCreator;
 use Adopet\Model\Dao\DaoPerfil;
 use Adopet\Model\Entity\Perfil;
 use Adopet\Model\Entity\User;
@@ -24,19 +25,29 @@ class PerfilController implements RequestHandlerInterface
         );
         $obUser->setId($_SESSION['user']['id']);
 
-        $obDaoPerfil = new DaoPerfil();
-        $obPerfil = new Perfil($obUser->getId());
-        $result = $obDaoPerfil->findByIdUser($obUser->getId());
+        $entityManager = EntityManagerCreator::createEntityManager();
+        $newPerfil = new Perfil();
+        $newPerfil->setUser($entityManager->find(User::class, $obUser->getId()));
 
-        if ($result) {
+//        $obDaoPerfil = new DaoPerfil();
+//        $obPerfil = new Perfil($obUser->getId());
+//        $result = $obDaoPerfil->findByIdUser($obUser->getId());
+
+        $perfilRepository = $entityManager->getRepository(Perfil::class);
+        $perfil = $perfilRepository->findOneBy(['user'=>$obUser->getId()]);
+//        var_dump($newPerfil);exit();
+        if (!$perfil) {
             // var_dump($result);
-            $obPerfil->setId($result->id);
-            $obPerfil->setPhone($result->phone);
-            $obPerfil->setCity($result->city);
-            $obPerfil->setAbout($result->about);
-            $obPerfil->setPhoto($result->photo);
-            $obPerfil->setName($result->name);
+//            $newPerfil->setId("");
+            $newPerfil->setPhone("");
+            $newPerfil->setCity("");
+            $newPerfil->setAbout("");
+            $newPerfil->setPhoto("");
+            $newPerfil->setName("");
+        }else{
+            $newPerfil = $perfil;
         }
+
 
         if ($request->getParsedBody() && array_key_exists('perfil', $request->getParsedBody())) {
             $perfil = $request->getParsedBody()['perfil'];
@@ -48,15 +59,18 @@ class PerfilController implements RequestHandlerInterface
                 $obUpload = (new PhotoUpload())->addPhoto(
                     __DIR__."/../../public/avatar/",
                     $_FILES['avatar'],
-                    $obPerfil
+                    $newPerfil
                 );
             }
 
-            $obPerfil->setName($perfil['name']);
-            $obPerfil->setPhone($perfil['phone']);
-            $obPerfil->setAbout($perfil['about']);
-            $obPerfil->setCity($perfil['city']);
-            $obDaoPerfil->insert($obPerfil, $obUser->getId());
+            $newPerfil->setName($perfil['name']);
+            $newPerfil->setPhone($perfil['phone']);
+            $newPerfil->setAbout($perfil['about']);
+            $newPerfil->setCity($perfil['city']);
+//            var_dump($newPerfil);exit();
+//            $obDaoPerfil->insert($obPerfil, $obUser->getId());
+            $entityManager->persist($newPerfil);
+            $entityManager->flush();
             return new Response(302, ['location' => '/perfil']);
         }
 
@@ -65,18 +79,18 @@ class PerfilController implements RequestHandlerInterface
 
         $upload = isset($_SESSION['upload']) ? $_SESSION['upload'] : "";
         //VERIFICA SE EXISTE FOTO DO AVATAR SE NÃO HOUVER, SERÁ COLOCADA UMA IMG GENERICA
-        if ($obPerfil->getPhoto() === "" && file_exists(__DIR__."/../../public/avatar/".$obPerfil->getPhoto())) {
+        if ($newPerfil->getPhoto() === "" && file_exists(__DIR__."/../../public/avatar/".$newPerfil->getPhoto())) {
             $imgPerfil = '../img/user.svg';
         } else {
-            $imgPerfil = $obPerfil->getPhoto();
+            $imgPerfil = $newPerfil->getPhoto();
         }
-
+        var_dump($newPerfil);
         $content = View::render('pages/perfil', [
             'upload' => $upload,
-            'name' => $obPerfil->getName(),
-            'phone' => $obPerfil->getPhone(),
-            'city' => $obPerfil->getCity(),
-            'about' => $obPerfil->getAbout(),
+            'name' => $newPerfil->getName(),
+            'phone' => $newPerfil->getPhone(),
+            'city' => $newPerfil->getCity(),
+            'about' => $newPerfil->getAbout(),
             'url-avatar' => $imgPerfil
 
         ]);

@@ -2,21 +2,47 @@
 
 namespace Adopet\Model\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="pets")
+ */
 class Pets
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
     private ?int $id;
+
+    /** @ORM\Column(type="string",length=50) */
     private string $name;
-    private string $age;
+    /** @ORM\Column(type="integer") */
+    private int $age;
+    /** @ORM\Column(type="string",length=255) */
     private string $size;
+    /** @ORM\Column(type="string",length=255) */
     private string $feature;
+    /** @ORM\Column(type="string",length=255) */
     private string $city;
+    /** @ORM\Column(type="string",length=11) */
     private string $tel;
+    /** @ORM\Column(type="string",length=255) */
     private ?string $photo;
+
+    /**
+     * Many features have one product. This is the owning side.
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="pets")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private User $user;
 
     public function __construct(
         int $id = 0,
         string $name="",
-        string $age="",
+        int $age=0,
         string $size="",
         string $feature="",
         string $city="",
@@ -76,7 +102,7 @@ class Pets
         $this->size = $size;
         return $this;
     }
-    
+
 
     public function getFeature(): string
     {
@@ -113,7 +139,7 @@ class Pets
 
     /**
      * Get the value of photo
-     */ 
+     */
     public function getPhoto()
     {
         return $this->photo;
@@ -123,7 +149,7 @@ class Pets
      * Set the value of photo
      *
      * @return  self
-     */ 
+     */
     public function setPhoto($photo)
     {
         if($photo === null){
@@ -133,5 +159,15 @@ class Pets
         $this->photo = $photo;
 
         return $this;
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
     }
 }

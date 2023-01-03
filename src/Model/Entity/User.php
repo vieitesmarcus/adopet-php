@@ -2,20 +2,53 @@
 
 namespace Adopet\Model\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ */
 class User
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
     private    int $id;
+
+    /** @ORM\Column(type="string",length=255) */
     private string $name;
+    /** @ORM\Column(type="string", unique=true, length=255) */
     private string $email;
+    /** @ORM\Column(type="string", length=255) */
     private string $password;
+    /** @ORM\Column(type="boolean") */
     private bool   $mailValidation;
+
+    /**
+     * One Customer has One Cart.
+     * @ORM\OneToOne(targetEntity=Perfil::class, mappedBy="user", cascade={"remove"})
+     */
     private Perfil $perfil;
-    private string $created_at;
-    private string $updated_at;
+
+    /**
+     * One product has many features. This is the inverse side.
+
+     * @ORM\OneToMany(targetEntity=Pets::class, mappedBy="user", cascade={"remove"})
+     */
+    private ?Collection $pets;
+
+    /** @ORM\Column(type="datetime") */
+    private \DateTime $created_at;
+    /** @ORM\Column(type="datetime") */
+    private \DateTime $updated_at;
 
     public function __construct(string $name=null, string $email=null, string $password=null)
     {
+        $this->pets = new ArrayCollection();
         $this->setName($name);
         $this->setEmail($email);
         $this->setPassword($password);
@@ -180,5 +213,20 @@ class User
         $this->perfil = $perfil;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<Pets>
+     */
+
+    public function getPets():Collection
+    {
+        return $this->pets;
+    }
+
+    public function addPets(Pets $pets)
+    {
+        $this->pets->add($pets);
+        $pets->setUser($this);
     }
 }

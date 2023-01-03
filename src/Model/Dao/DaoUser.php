@@ -52,13 +52,13 @@ class DaoUser extends Conexao
         try {
             $email = $user->getEmail();
             $password = $user->getPassword();
-            $sql = "SELECT id, name, email, email_validation, password,created_at, updated_at FROM user WHERE email = ? AND password = ?";
+            $sql = "SELECT id, name, email, mailValidation, password,created_at, updated_at FROM user WHERE email = ? AND password = ?";
             $stmt = $this->conexao->prepare($sql);
             $stmt->execute([$email, $password]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($result) {
                 $_SESSION["user"] = $result;
-                if ($_SESSION['user']['email_validation'] === "0") {
+                if ($_SESSION['user']['mailValidation'] === "0") {
                     throw new PDOException("email não validado");
                     return false;
                 }
@@ -78,7 +78,7 @@ class DaoUser extends Conexao
     public function update(array $params = []): bool
     {
         try {
-            $sql = "UPDATE user SET email_validation = 1 WHERE email = ?"; //sql
+            $sql = "UPDATE user SET mailValidation = 1 WHERE email = ?"; //sql
             $stmt = $this->conexao->prepare($sql);
             return $stmt->execute($params);
         } catch (PDOException $e) {

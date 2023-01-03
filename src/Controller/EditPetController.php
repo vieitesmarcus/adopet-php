@@ -2,6 +2,7 @@
 
 namespace Adopet\Controller;
 
+use Adopet\Helper\EntityManagerCreator;
 use Adopet\Model\Dao\DaoPerfil;
 use Adopet\Model\Dao\DaoPets;
 use Adopet\Model\Dao\DaoUser;
@@ -19,24 +20,23 @@ class EditPetController implements RequestHandlerInterface
 {
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $obDaoUser = (new DaoUser())->find($_SESSION['user']['id']);
-        $obUser = new User($obDaoUser->name, $obDaoUser->email);
-        $obUser->setId($obDaoUser->id);
-        $obUser->setMailValidation($obDaoUser->email_validation);
-        $obUser->setCreated_at($obDaoUser->created_at);
+        $user = EntityManagerCreator::createEntityManager()->find(User::class, $_SESSION['user']['id']);
+//        var_dump($user);exit();
+
 
 
         /*
          *@var Perfil $obPerfil
          */
-        $obPerfil = (new DaoPerfil())->findByIdUser($obUser->getId());
-
+//        $obPerfil = $user->getPerfil();
+//        var_dump($obPerfil);exit();
 
 
         if(array_key_exists('id', $request->getQueryParams()) && $request->getQueryParams()['id'] !== ""){
             if(filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT)){
                 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRIPPED);
-                $obPet = (new DaoPets())->findById($id, $_SESSION['user']['id']);
+                $obPet = EntityManagerCreator::createEntityManager()->find(Pets::class, $id);
+//                $obPet = (new DaoPets())->findById($id, $_SESSION['user']['id']);
                 if(!$obPet){
                     return new Response(302, ['location'=> '/mypets']);
                 }
@@ -50,14 +50,14 @@ class EditPetController implements RequestHandlerInterface
                 'caracteristicas' => $_SESSION['caracteristicas']??"",//possiveis erros
                 'cidade' => $_SESSION['cidade']??"",//possiveis erros
                 'telefone' => $_SESSION['telefone']??"",//possiveis erros
-                'url-pet'=> $photo = ($obPet->photo === "") ? 'dunga.png':$obPet->photo,
-                'id'=>$obPet->id,
-                'name' => $obPet->name??"",//pets
-                'age' => $obPet->age??"",//pets
-                'size' => $obPet->size??"",//pets
-                'feature' => $obPet->feature??"",//pets
-                'city' => $obPet->city??"",//pets
-                'tel' => $obPet->tel??"",//pets
+                'url-pet'=> $photo = ($obPet->getPhoto() === "") ? 'dunga.png':$obPet->getPhoto(),
+                'id'=>$obPet->getId(),
+                'name' => $obPet->getName()??"",//pets
+                'age' => $obPet->getAge()??"",//pets
+                'size' => $obPet->getSize()??"",//pets
+                'feature' => $obPet->getFeature()??"",//pets
+                'city' => $obPet->getCity()??"",//pets
+                'tel' => $obPet->getTel()??"",//pets
                 'url-avatar' => $obPerfil->photo??"../img/user.svg"
             ]);
 
@@ -68,7 +68,7 @@ class EditPetController implements RequestHandlerInterface
 
         if(array_key_exists('pet', $request->getParsedBody()??[]) && $request->getParsedBody()){
             $pets = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRIPPED);
-            $pet = (new DaoPets())->findById($pets['pet']['id'], $obUser->getId());
+            $pet = (new DaoPets())->findById($pets['pet']['id'], $user->getId());
 
             $petNovo = new Pets(
                 (int)$pets['pet']['id'],
@@ -90,7 +90,7 @@ class EditPetController implements RequestHandlerInterface
                 );
             }
 
-            $update = (new DaoPets())->update($petNovo, $obUser->getId());
+            $update = (new DaoPets())->update($petNovo, $user->getId());
 
         }
 

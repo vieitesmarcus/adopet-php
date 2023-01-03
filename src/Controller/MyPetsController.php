@@ -2,9 +2,8 @@
 
 namespace Adopet\Controller;
 
-use Adopet\Model\Dao\DaoPerfil;
+use Adopet\Helper\EntityManagerCreator;
 use Adopet\Model\Dao\DaoPets;
-use Adopet\Model\Dao\DaoUser;
 use Adopet\Model\Entity\Perfil;
 use Adopet\Model\Entity\Pets;
 use Adopet\Model\Entity\User;
@@ -22,23 +21,19 @@ class MyPetsController implements RequestHandlerInterface
     {
         //---------------------------------------------------------------------------
         //cria um objeto de Usuario
-        $obUser = new User($_SESSION['user']['name'], $_SESSION['user']['email']);
-        $obUser->setMailValidation($_SESSION['user']['email_validation']);
-        $obUser->setId($_SESSION['user']['id']);
-        $obUser->setCreated_at($_SESSION['user']['created_at']);
-        $obUser->setUpdated_at($_SESSION['user']['updated_at']);
+        $obUser = EntityManagerCreator::createEntityManager()->find(User::class, $_SESSION['user']['id']);
+//        $obUser = new User($_SESSION['user']['name'], $_SESSION['user']['email']);
+//        $obUser->setMailValidation($_SESSION['user']['mailValidation']);
+//        $obUser->setId($_SESSION['user']['id']);
+//        $obUser->setCreated_at(new \DateTime($_SESSION['user']['created_at']));
+//        $obUser->setUpdated_at(new \DateTime($_SESSION['user']['updated_at']));
+//        var_dump($obUser->getPerfil());exit();
 
         //cria um objeto de perfil
-        $obPerfil = new Perfil($obUser->getId());
-        if ($daoPerfil = (new DaoPerfil())->findByIdUser($obPerfil->getIdUser())) {
-            $obPerfil->setId($daoPerfil->id);
-            $obPerfil->setPhoto($daoPerfil->photo);
-            $obPerfil->setName($daoPerfil->name);
-            $obPerfil->setPhone($daoPerfil->phone);
-            $obPerfil->setCity($daoPerfil->city);
-            $obPerfil->setAbout($daoPerfil->about);
+        if ($daoPerfil = EntityManagerCreator::createEntityManager()->find(Perfil::class, $obUser->getId())) {
+
         }
-        $obUser->setPerfil($obPerfil);
+
         //---------------------------------------------------------------------------
 
 
@@ -56,16 +51,22 @@ class MyPetsController implements RequestHandlerInterface
             $id = filter_var($request->getQueryParams()['id'], FILTER_VALIDATE_INT);
             $idUser = $obUser->getId();
 
-            $obDaoPets = new DaoPets();
-            $obPet = $obDaoPets->find($id); //armazena o item que será deletado
-
-            if ($obDaoPets->delete($id,
-                $idUser)) { //busca o item pelo id dele mesmo e o id do usuario para que somente o usuario delete o item.
+            $entityManager = EntityManagerCreator::createEntityManager();
+            $petRepository = $entityManager->getRepository(Pets::class);
+            $obDaoPets = $petRepository->findOneBy(['id' => $id, 'user' => $idUser]);
+            if ($obDaoPets->getPhoto()) { //busca o item pelo id dele mesmo e o id do usuario para que somente o usuario delete o item.
                 $drivePhoto = __DIR__."/../../public/img/pets/";
-                if (file_exists($drivePhoto.$obPet->photo) && $obPet->photo !== "" && $obPet->photo !== null) { // verifica se existe alguma foto para aquele pet
-                    unlink($drivePhoto.$obPet->photo); //exclui a foto Pet
+                if (file_exists($drivePhoto.$obDaoPets->getPhoto()) && $obDaoPets->getPhoto() !== "" && $obDaoPets->getPhoto() !== null) { // verifica se existe alguma foto para aquele pet
+                    unlink($drivePhoto.$obDaoPets->getPhoto()); //exclui a foto Pet
                 }
             }
+            $entityManager->remove($obDaoPets);
+            $entityManager->flush();
+
+//            var_dump($obDaoPets);exit();
+//            $obPet = $obDaoPets->find($id); //armazena o item que será deletado
+
+
             return new Response(200, ['location' => '/mypets']);
         }
 
@@ -100,7 +101,7 @@ class MyPetsController implements RequestHandlerInterface
                     $_FILES['photo'],
                     $obPet
                 );
-                if(!$upload){
+                if (!$upload) {
                     return new Response(302, ['location' => '/mypets']);
                 }
             }
@@ -133,13 +134,9 @@ class MyPetsController implements RequestHandlerInterface
             $page = $begin;
         }
 
-        //CARREGA OS PETS QUE O USUARIO ADICIONOU 
-        $obDaoPets = new DaoPets();
-
-
-        /** @var Pets $pets */
-        $pets = $obDaoPets->findAll($obUser->getId(), $page);
-
+        //CARREGA OS PETS QUE O USUARIO ADICIONOU
+        $pets = EntityManagerCreator::createEntityManager()->getRepository(Pets::class)->findBy(['user' => $obUser->getId()]);
+//            var_dump($pets);
         $pagePets = "";
         if ($pets) {
             foreach ($pets as $pet) {
@@ -157,14 +154,9 @@ class MyPetsController implements RequestHandlerInterface
         }
         //--------------------------------------
 
-
-            if ($obUser->getPerfil()->getPhoto() === "") {
-                $imgPerfil = '../img/user.svg';
-            } else {
-                $imgPerfil = $obUser->getPerfil()->getPhoto();
-            }
-
-//        }
+        if ($daoPerfil) {
+            $imgPerfil = $obUser->getPerfil()->getPhoto();
+        }
 
 
         $content = View::render('pages/mypets', [
@@ -175,12 +167,12 @@ class MyPetsController implements RequestHandlerInterface
             'city' => $city,
             'tel' => $tel,
             "pets" => $pagePets,
-            'url-avatar' => $imgPerfil,
+            'url-avatar' => $imgPerfil ?? '../img/user.svg',
             'photo' => $photo,
             'page' => $page,
-            'pageNext' => ($page + 1) >= $qntyPages ? $qntyPages : $page+ 1,
-            'pagePrev' => ($page - 1) <= 1 ? 1 : $page-1,
-            'pagesTotal' => $page .' de '.$qntyPages,
+            'pageNext' => ($page + 1) >= $qntyPages ? $qntyPages : $page + 1,
+            'pagePrev' => ($page - 1) <= 1 ? 1 : $page - 1,
+            'pagesTotal' => $page.' de '.$qntyPages,
             'upload' => $_SESSION['upload'] ?? ""
         ]);
         unset($_SESSION['upload']);

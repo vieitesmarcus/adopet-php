@@ -18,7 +18,7 @@ class LoginUserController  implements RequestHandlerInterface
         $user['user']['password'] = filter_var($user['user']['password'], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
         $obUser = new User("", $user['user']['email'], $user['user']['password']);
-
+//        var_dump($obUser);exit();
         $obDaoUser = new DaoUser();
         if(!$obDaoUser->load($obUser)){
             return new Response(302, ['Location'=>'/login']);

@@ -1,28 +1,46 @@
 <?php
 
 namespace Adopet\Model\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="perfil")
+ */
 class Perfil
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
+     */
     private int $id;
+
+    /** @ORM\Column(type="string",length=255) */
     private string $photo;
+    /** @ORM\Column(type="string",length=255) */
     private string $name;
+    /** @ORM\Column(type="string",length=255) */
     private string $phone;
+    /** @ORM\Column(type="string",length=255) */
     private string $city;
+    /** @ORM\Column(type="string",length=255) */
     private string $about;
-    private int $idUser;
+
+    /**
+     * One Cart has One Customer.
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="perfil" )
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id",columnDefinition="INT NOT NULL")
+     */
+    private User $user;
 
     public function __construct(
-        int $idUser,
-        int $id = 0,
         string $photo = "",
         string $name = "",
         string $phone = "",
         string $city = "",
         string $about = ""
     ) {
-        $this->setIdUser($idUser);
-        $this->setId($id);
         $this->setPhoto($photo);
         $this->setName($name);
         $this->setPhone($phone);
@@ -155,9 +173,9 @@ class Perfil
     /**
      * Get the value of idUser
      */
-    public function getIdUser()
+    public function getUser(): User
     {
-        return $this->idUser;
+        return $this->user;
     }
 
     /**
@@ -165,9 +183,9 @@ class Perfil
      *
      * @return  self
      */
-    public function setIdUser($idUser)
+    public function setUser(User $user)
     {
-        $this->idUser = $idUser;
+        $this->user = $user;
 
         return $this;
     }

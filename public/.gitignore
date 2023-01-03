@@ -2,3 +2,6 @@
 /img/*
 /data.php
 /data.txt
+/delete.php
+/insertUser.php
+/listUsers.php
